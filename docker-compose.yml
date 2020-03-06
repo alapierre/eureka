@@ -1,0 +1,8 @@
+version: '3'
+services:
+  eureka:
+    image: lapierre/s4t-eureka:1.0.1
+    ports:
+     - "8761:8761"
+    environment:
+      - JAVA_OPTS=-Xmx512m

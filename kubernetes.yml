@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-name
+      name: eureka
+  template:
+    metadata:
+      labels:
+        app: app-name
+        name: eureka
+    spec:
+      containers:
+        - name: eureka
+          image: lapierre/eureka
+          ports:
+            - containerPort: 8761
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS
+              value: -Xmx256
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka
+spec:
+  ports:
+    - name: "8761"
+      port: 8761
+      targetPort: 8761
+  selector:
+    app: app-name
+    name: eureka
+status:
+  loadBalancer: {}

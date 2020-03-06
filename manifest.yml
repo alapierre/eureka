@@ -1,0 +1,12 @@
+---
+applications:
+  - name: alapierre-eureka
+    path: target/eureka-1.0.6.jar
+    buildpacks:
+      - java_buildpack
+    memory: 750M
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    timeout: 80
+    env:
+      spring.profiles.active: cf
